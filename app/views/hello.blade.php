@@ -64,6 +64,13 @@
         });
 
     })();
+
+    var tasksCollection = new App.Collections.Tasks;
+    tasksCollection.fetch();
+    var tasksView = new App.Views.Tasks({ collection: tasksCollection });
+    tasksView.render();
+    $(document.body).append(tasksView.el);
+
 </script>
 </body>
 </html>
