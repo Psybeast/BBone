@@ -67,7 +67,16 @@ class TasksController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+        $task = Task::find($id);
+
+        print_r($input['title']);
+       $task->title = $input['title'];
+        $task->completed = $input['completed'];
+
+        $task->save();
+
+
 	}
 
 
