@@ -8,9 +8,9 @@
 <body>
     <h1>Hey mon, long time no see!</h1>
 
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="http://underscorejs.org/underscore.js"></script>
-<script src="http://backbonejs.org/backbone.js"></script>
+<script src="../app/js/jquery.js"></script>
+<script src="../app/js/underscore.js"></script>
+<script src="../app/js/backbone.js"></script>
 <script>
     (function(){
         window.App = {
