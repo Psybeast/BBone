@@ -32,7 +32,7 @@ class TasksController extends \BaseController {
 	public function store()
 	{
         $input = Input::all();
-        $task = Task::create(array(
+        return Task::create(array(
             'title' => $input['title'],
             'completed' => $input['completed']
         ));
