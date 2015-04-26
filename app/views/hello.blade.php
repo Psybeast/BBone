@@ -14,7 +14,7 @@
 <script>
     (function(){
         window.App = {
-            Models: {}
+            Models: {},
             Collections: {},
             Views: {}
         };
@@ -24,7 +24,9 @@
                 title: '',
                 completed: 0,
                 id: ''
-            }
+            },
+
+            urlRoot: 'tasks'
         })
 
     })();

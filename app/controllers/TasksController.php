@@ -43,7 +43,7 @@ class TasksController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return Task::find($id);
 	}
 
 
