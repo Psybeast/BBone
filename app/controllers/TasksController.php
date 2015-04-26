@@ -70,8 +70,7 @@ class TasksController extends \BaseController {
 		$input = Input::all();
         $task = Task::find($id);
 
-        print_r($input['title']);
-       $task->title = $input['title'];
+        $task->title = $input['title'];
         $task->completed = $input['completed'];
 
         $task->save();
@@ -88,7 +87,8 @@ class TasksController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$task = Task::find($id)->delete();
+
 	}
 
 
