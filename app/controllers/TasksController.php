@@ -20,7 +20,12 @@ class TasksController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+        print 'vagy create?';
+//        $input = Input::all();
+//        print_r($input['title']);
+//        //   return Task::create(array(
+//        //    'title' => $input->title
+//        //));
 	}
 
 
@@ -31,7 +36,10 @@ class TasksController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        print 'akkor store?';
+        $input = Input::all();
+        print_r($input['title']);
+        $task = Task::create(array('title' => $input['title'], 'completed' => $input['completed']));
 	}
 
 
