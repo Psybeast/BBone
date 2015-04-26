@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder {
 
 class TasksTableSeeder extends Seeder {
     public function run(){
-        DB::table('tasks')->delete();
-        array('title' => 'Go to the store');
-       // Task::create(array('title' => 'Go to the mall'));
-       // Task::create(array('title' => 'Go to HELL'));
+        DB::table('tasks')->insert(array(
+        array('title' => 'Go to the store'),
+        array('title' => 'Go to the mall'),
+        array('title' => 'Go to HELL')));
     }
 }
