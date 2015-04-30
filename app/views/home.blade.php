@@ -96,6 +96,7 @@
                     </div>
                     <div>
                         <input type="submit" value="Add Contact" />
+                        <button type="button" class="cancel">Cancel</button>
                     </div>
                 </form>
             </section>

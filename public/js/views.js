@@ -40,7 +40,7 @@ App.Views.AddContact = Backbone.View.extend({
     addContact: function(e){
         e.preventDefault(e);
         
-       var newContact = this.collection.create({
+       this.collection.create({
            first_name: this.first_name.val(),
            last_name: this.last_name.val(),
            email_address: this.email_address.val(),
@@ -77,7 +77,8 @@ App.Views.EditContact = Backbone.View.extend({
     },
     
     events: {
-        'submit form': 'submit'
+        'submit form': 'submit',
+        'click button.cancel': 'cancel'
     },
     
     submit: function(e){
@@ -89,6 +90,12 @@ App.Views.EditContact = Backbone.View.extend({
             email_address: this.email_address.val(),
             description: this.description.val()
         });
+        
+        this.remove();
+    },
+    
+    cancel: function(){
+        this.remove();
     },
     
     render: function(){
@@ -109,7 +116,7 @@ App.Views.Contacts = Backbone.View.extend({
     tagName: 'tbody',
     
     initialize: function(){
-        this.collection.on('sync', this.addOne, this);
+        this.collection.on('add', this.addOne, this);
     },
     
     render: function(){
@@ -135,6 +142,7 @@ App.Views.Contact = Backbone.View.extend({
     
     initialize: function(){
         this.model.on('destroy', this.unrender, this);
+        this.model.on('change', this.render, this);
     },
     
     events: {
