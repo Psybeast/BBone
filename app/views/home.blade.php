@@ -7,6 +7,7 @@
         <style>
             table thead td { font-weight: bold}
             .module {margin-bottom: 2em}
+            textarea {min-height: 80px; min-width: 200px}
         </style>
     </head>
     <body>
@@ -53,7 +54,6 @@
             </section>
             
             <section class="editSection module">
-                <h2>Edit contact <%= first_name%> <%=last_name %></h2>
                 <div id="editContact">
                     
                 </div>
@@ -71,6 +71,7 @@
         
         <script id="editContactTemplate" type="text/template">
             <section class="editContactForm">
+                <h2>Edit contact: <%= first_name%> <%=last_name %></h2>
                 <form id="editContact">
                     <div>
                         <label for="edit_first_name">First Name: </label>
