@@ -5,12 +5,17 @@
  */
 App.Views.App = Backbone.View.extend({
     initialize: function(){
+        vent.on('contact:edit', this.editContact, this);
         var addContactView = new App.Views.AddContact( {collection: App.contacts });
         var allContactsView = new App.Views.Contacts({ collection: App.contacts }).render();
         
-        $('#allContacts').append(allContactsView.el)
-        
-    }
+        $('#allContacts').append(allContactsView.el);
+   },
+   
+   editContact: function(contact){
+       var editContactView = new App.Views.EditContact ({ model: contact });
+       $('#editContact').html(editContactView.el);
+   }
 });
 
 /*
@@ -55,6 +60,48 @@ App.Views.AddContact = Backbone.View.extend({
 
 /*
  |-------------------------------------------------------------------------------
+ | Edit Contact View
+ |-------------------------------------------------------------------------------
+ */
+App.Views.EditContact = Backbone.View.extend({
+    template: template("editContactTemplate"),
+    
+    initialize: function(){
+        this.render();
+        
+        this.form = this.$('form');
+        this.first_name = form.find('#edit_first_name');
+        this.last_name = form.find('#edit_last_name');
+        this.email_address = form.find('#edit_email_address');
+        this.description = form.find('#edit_description');        
+    },
+    
+    events: {
+        'submit form': 'submit'
+    },
+    
+    submit: function(e){
+        e.preventDefault();
+        
+        this.model.save({
+            first_name: this.first_name,
+            last_name: this.last_name,
+            email_address: this.email_address,
+            description: this.description
+        });
+    },
+    
+    render: function(){
+        var html = this.template( this.model.toJSON() );
+        
+        this.$el.html( html );
+        return this;
+    }
+    
+});
+
+/*
+ |-------------------------------------------------------------------------------
  | All Contacts View
  |-------------------------------------------------------------------------------
  */
@@ -86,8 +133,29 @@ App.Views.Contact = Backbone.View.extend({
     
     template: template('allContactsTemplate'),
     
+    initialize: function(){
+        this.model.on('destroy', this.unrender, this);
+    },
+    
+    events: {
+        'click a.delete': 'deleteContact',
+        'click a.edit'  : 'editContact'
+    },
+    
+    deleteContact: function(){
+        this.model.destroy();
+    },
+    
+    editContact: function(){
+        vent.trigger('contact:edit', this.model);               
+    },
+    
     render: function(){
         this.$el.html( this.template( this.model.toJSON() ));
         return this;
-    }   
+    },
+    
+    unrender: function(){
+        this.remove();
+    }
 });
